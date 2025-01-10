@@ -3,6 +3,11 @@ package org.example;
 import java.util.*;
 
 public class ShopApp {
+
+    public static final int MIN_RATING = 1;
+    public static final int MAX_RATING = 5;
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         ProductService productService = new ProductService();
@@ -13,6 +18,9 @@ public class ShopApp {
         List<Product> initialProducts = Arrays.asList(
                 new Product("Laptop", "Dell", 800.00),
                 new Product("Phone", "Apple", 999.99),
+                new Product("Phone", "Samsung", 350.00),
+                new Product("Phone", "Nokia", 767.00),
+                new Product("Laptop", "Asus", 1200.00),
                 new Product("Headphones", "Sony", 199.99)
         );
         initialProducts.forEach(productService::addProduct);
@@ -97,11 +105,12 @@ public class ShopApp {
                     if (product.isPresent()) {
                         System.out.print("Enter rating (1-5): ");
                         int rating = scanner.nextInt();
-                        if (rating >= 1 && rating <= 5) {
+                        if (rating >= MIN_RATING && rating <= MAX_RATING) {
                             product.get().addRating(rating);
                             System.out.println("Thank you for your rating!");
                         } else {
-                            System.out.println("Invalid rating. Must be between 1 and 5.");
+                            System.out.println("Invalid rating. Must be between " + MIN_RATING +
+                                    " and " + MAX_RATING);
                         }
                     } else {
                         System.out.println("Product not found.");

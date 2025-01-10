@@ -4,6 +4,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class ProductService {
+
+    public static final int MAX_RECOMMENDATIONS = 3;
+
     private final List<Product> products;
 
     public ProductService() {
@@ -30,7 +33,7 @@ public class ProductService {
     public List<Product> recommendProducts() {
         return products.stream()
                 .sorted(Comparator.comparingDouble(Product::getRating).reversed())
-                .limit(3)
+                .limit(MAX_RECOMMENDATIONS)
                 .collect(Collectors.toList());
     }
 }
